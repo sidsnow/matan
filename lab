@@ -29,9 +29,9 @@ def getIntegralsToPlot(t, refval):
     sums = []; sums.append(getIntSums(t))
     bars = []
     # эмпирически проверенное гениальное архитектурное решение
-    bars.append(go.Bar(visible = False, x=sums[0][2]-3/2/t,y=sums[0][3], name = 'right_sum; error: ' + str(intError(sums[0][3],t,refval)), opacity = 0.6, marker = dict(color = 'red')))
-    bars.append(go.Bar(visible = False, x=sums[0][4], y=sums[0][5], name = 'middle_sum; error: ' + str(intError(sums[0][5],t,refval)),opacity = 0.6, marker = dict(color = 'blue')))
-    bars.append(go.Bar(visible = False,x=sums[0][0]+3/2/t,y=sums[0][1], name = 'left_sum; error: ' + str(intError(sums[0][1],t,refval)), opacity = 0.6, marker = dict(color = 'green')))
+    bars.append(go.Bar(visible = False, x=sums[0][2]-3/2/t,y=sums[0][3], name = 'right_sum = ' + str(sum(sums[0][3])*3/t) + '; error: ' + str(intError(sums[0][3],t,refval)), opacity = 0.6, marker = dict(color = 'red')))
+    bars.append(go.Bar(visible = False, x=sums[0][4], y=sums[0][5], name = 'middle_sum = ' + str(sum(sums[0][5])*3/t) + '; error: ' + str(intError(sums[0][5],t,refval)),opacity = 0.6, marker = dict(color = 'blue')))
+    bars.append(go.Bar(visible = False,x=sums[0][0]+3/2/t,y=sums[0][1], name = 'left_sum = ' + str(sum(sums[0][1])*3/t) + '; error: ' + str(intError(sums[0][1],t,refval)), opacity = 0.6, marker = dict(color = 'green')))
     return bars
     # иксы двигаются тк по умолчанию основание прямоугольника будет посередине значения, что не подходит для отрисовки
 def calculateIntToCompare(t):
@@ -71,6 +71,6 @@ for i in [1,4,7,10]:
 sliders = [dict (steps = steps)]
 fig.layout.sliders = sliders
 fig.update_layout(bargap = 0,barmode = 'overlay')
-#fig.update_layout(legend_orientation="h")
+fig.update_layout(legend = dict(y = -0.5, x = 0))
 
 fig.show()
